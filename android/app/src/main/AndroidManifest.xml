@@ -12,6 +12,11 @@
         android:label="maps_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyC3QeNDluEv7r9ZIRktle6W2UJ00j71m4E"/>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
