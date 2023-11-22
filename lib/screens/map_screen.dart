@@ -74,6 +74,8 @@ class _MapScreenState extends State<MapScreen> {
                     ),
 
                     // TODO:  Botones...
+                    const SearchBar1(),
+                    const ManualMarker(),
                   ],
                 ),
               );
