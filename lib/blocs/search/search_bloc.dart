@@ -17,6 +17,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     on<OnDesActivateManualMarkerEvent>(
         (event, emit) => emit(state.copyWith(displayManualMarker: false)));
+
+    on<OnNewPlacesFoundEvent>(
+        (event, emit) => emit(state.copyWith(places: event.places)));
+
+    on<OnAddToHistoryEvent>((event, emit) =>
+        emit(state.copyWith(history: [event.place, ...state.history])));
   }
 
   //*  Metodos
@@ -38,5 +44,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     return RouteDestination(
         points: latLngList, duration: duration, distance: distance);
+  }
+
+  Future getPlacesByQuery(LatLng proximity, String query) async {
+    final newPlaces = await trafficService.getResultsByQuery(proximity, query);
+
+    // TODO: Por Aquí Tenemos Que Almacenar En El State
+    add(OnNewPlacesFoundEvent(newPlaces));
   }
 }
